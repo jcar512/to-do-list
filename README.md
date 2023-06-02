@@ -1,1 +1,1 @@
-Simple to do list made with react and ts
+Simple to do list made with react
