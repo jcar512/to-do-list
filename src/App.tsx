@@ -58,13 +58,13 @@ function App() {
         />
       </div>
       <div className='mt-6 overflow-auto'>
-        {taskArray.map((element: string, index: number) => (
-          <Card
-            key={index}
-            text={element}
-            handleClick={() => removeTask(index)}
-          />
-        ))}
+        <ul>
+          {taskArray.map((element: string, index: number) => (
+            <li key={index}>
+              <Card text={element} handleClick={() => removeTask(index)} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
