@@ -48,7 +48,7 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col h-screen my-10 mx-auto p-5 h-4/5 w-4/5 bg-slate-100 shadow-xl rounded border-2 border-color-white content-center'>
+    <div className='flex flex-col h-screen my-10 mx-auto p-5 h-4/5 w-4/5 xl:w-3/5 ease-out duration-200 bg-slate-100 shadow-xl rounded border-2 border-color-white content-center'>
       <Header text='To do list' />
       <div className='flex mt-6'>
         <Form
@@ -57,7 +57,7 @@ function App() {
           handleInputChange={handleInputChange}
         />
       </div>
-      <div className='mt-6'>
+      <div className='mt-6 overflow-auto'>
         {taskArray.map((element: string, index: number) => (
           <Card
             key={index}
