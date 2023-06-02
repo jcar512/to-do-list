@@ -4,24 +4,27 @@ import Header from './components/Header';
 
 import { useEffect, useState } from 'react';
 
-import { taskList } from './utils/taskList';
-
 function App() {
-  const [taskArray, setTaskArray] = useState([]);
+  const [taskArray, setTaskArray] = useState<string[]>([]);
 
   const [formData, setFormData] = useState({
     task: '',
   });
 
   useEffect(() => {
+    const taskList =
+      JSON.parse(window.localStorage.getItem('tasks') as string) || [];
+
     setTaskArray(taskList);
   }, []);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     if (formData.task !== '') {
-      taskList.push(formData.task);
-      window.localStorage.setItem('tasks', JSON.stringify(taskList));
+      const newArray = [...taskArray, formData.task];
+      setTaskArray(newArray);
+      window.localStorage.setItem('tasks', JSON.stringify(newArray));
       setFormData({
         task: '',
       });
