@@ -69,7 +69,7 @@ function App() {
   return (
     <div className='flex flex-col content-center'>
       <Header text='Taskify' />
-      <div className='flex mt-8'>
+      <div className='flex mt-6'>
         <Form
           inputValueTitle={formData.title}
           inputValueTask={formData.task}
@@ -78,8 +78,8 @@ function App() {
           handleTaskInputChange={handleInputChange}
         />
       </div>
-      <div className='mt-6'>
-        <div className='flex flex-wrap mx-auto w-5/6 justify-between'>
+      <div className='mt-10'>
+        <div className='mx-auto w-5/6 flex flex-col items-center md:flex-row md:flex-wrap md:grid-col md:gap-6'>
           {dataArray.map((element, index: number) => (
             <Card
               key={index}

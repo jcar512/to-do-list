@@ -8,7 +8,7 @@ function Button({ text, handleClick, classProps }: ButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={`${classProps} rounded bg-[#E1D4BB] hover:bg-[#CBB279] h-10 font-semibold text-[#537188] focus:outline-none focus:ring focus:ring-[#C58940]`}
+      className={`${classProps} ease-in-out duration-300 rounded font-semibold text-[#4F709C] hover:text-[#9DB2BF] focus:outline-none focus:ring`}
     >
       {text}
     </button>

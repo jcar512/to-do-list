@@ -15,7 +15,7 @@ function Input({
 }: InputProps) {
   return (
     <input
-      maxLength={30}
+      maxLength={29}
       type='text'
       name={name}
       value={inputValue}
