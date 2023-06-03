@@ -9,7 +9,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #EEE3CB;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,6 +20,7 @@
 
 
 body {
+  background: #EEEEEE;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }

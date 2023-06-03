@@ -4,17 +4,24 @@ type InputProps = {
   name: string;
   inputValue: string;
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
 };
 
-function Input({ name, handleInputChange, inputValue }: InputProps) {
+function Input({
+  name,
+  handleInputChange,
+  inputValue,
+  placeholder,
+}: InputProps) {
   return (
     <input
+      maxLength={30}
       type='text'
       name={name}
       value={inputValue}
       onChange={handleInputChange}
-      placeholder='Write something!'
-      className='w-5/6 bg-transparent rounded border-[#C58940] border-b-2 border-black border-dotted font-semibold text-slate-700 placeholder:text-slate-500 focus:outline-none'
+      placeholder={placeholder}
+      className='mb-2 w-5/6 bg-transparent font-semibold text-slate-700 placeholder:text-slate-500 focus:outline-none'
     />
   );
 }

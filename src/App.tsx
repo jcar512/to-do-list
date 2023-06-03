@@ -4,34 +4,51 @@ import Header from './components/Header';
 
 import { useEffect, useState } from 'react';
 
+type TaskData = {
+  title: string;
+  task: string;
+};
+
 function App() {
-  const [taskArray, setTaskArray] = useState<string[]>([]);
+  const [dataArray, setDataArray] = useState<TaskData[]>([]);
 
   const [formData, setFormData] = useState({
+    title: '',
     task: '',
   });
 
   useEffect(() => {
-    const taskList =
-      JSON.parse(window.localStorage.getItem('tasks') as string) || [];
+    const storedData = window.localStorage.getItem('tasksData');
+    const data = storedData ? JSON.parse(storedData) : [];
 
-    setTaskArray(taskList);
+    setDataArray(data);
   }, []);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (formData.task !== '') {
-      const newArray = [...taskArray, formData.task];
-      setTaskArray(newArray);
-      window.localStorage.setItem('tasks', JSON.stringify(newArray));
+    if (formData.title !== '' && formData.task !== '') {
+      const newData = {
+        title: formData.title,
+        task: formData.task,
+      };
+
+      const data = [...dataArray, newData];
+
+      setDataArray(data);
+
+      window.localStorage.setItem('tasksData', JSON.stringify(data));
+
       setFormData({
+        title: '',
         task: '',
       });
     }
   }
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleInputChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [event.target.name]: event.target.value,
@@ -39,32 +56,39 @@ function App() {
   }
 
   function removeTask(index: number) {
-    const newArray = [
-      ...taskArray.slice(0, index),
-      ...taskArray.slice(index + 1, taskArray.length),
+    const newData = [
+      ...dataArray.slice(0, index),
+      ...dataArray.slice(index + 1, dataArray.length),
     ];
-    setTaskArray(newArray);
-    window.localStorage.setItem('tasks', JSON.stringify(newArray));
+
+    setDataArray(newData);
+
+    window.localStorage.setItem('tasksData', JSON.stringify(newData));
   }
 
   return (
-    <div className='flex flex-col h-screen my-10 mx-auto p-5 h-4/5 w-4/5 xl:w-3/5 ease-out duration-200 bg-slate-100 shadow-xl rounded border-2 border-color-white content-center'>
-      <Header text='To do list' />
-      <div className='flex mt-6'>
+    <div className='flex flex-col content-center'>
+      <Header text='Taskify' />
+      <div className='flex mt-8'>
         <Form
-          inputValue={formData.task}
+          inputValueTitle={formData.title}
+          inputValueTask={formData.task}
           handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
+          handleTitleInputChange={handleInputChange}
+          handleTaskInputChange={handleInputChange}
         />
       </div>
-      <div className='mt-6 overflow-auto'>
-        <ul>
-          {taskArray.map((element: string, index: number) => (
-            <li key={index}>
-              <Card text={element} handleClick={() => removeTask(index)} />
-            </li>
+      <div className='mt-6'>
+        <div className='flex flex-wrap mx-auto w-5/6 justify-between'>
+          {dataArray.map((element, index: number) => (
+            <Card
+              key={index}
+              title={element.title}
+              text={element.task}
+              handleClick={() => removeTask(index)}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
