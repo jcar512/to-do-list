@@ -80,11 +80,11 @@ function App() {
       </div>
       <div className='mt-10'>
         <div className='mx-auto w-5/6 flex flex-col items-center md:flex-row md:flex-wrap md:grid-col md:gap-6'>
-          {dataArray.map((element, index: number) => (
+          {dataArray.map(({ title, task }, index: number) => (
             <Card
               key={index}
-              title={element.title}
-              text={element.task}
+              title={title}
+              text={task}
               handleClick={() => removeTask(index)}
             />
           ))}
